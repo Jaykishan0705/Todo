@@ -1,6 +1,7 @@
 import React from "react";
+import {COMPLETED} from "./App";
 
-class ShowTasks extends React.Component{
+class ShowTasks extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -10,9 +11,12 @@ class ShowTasks extends React.Component{
             <div>
                 <ul>
                     {
-                        this.props.tasks.map((obj)=>{
+                        this.props.tasks.map((obj) => {
                             return (
-                                <div key={obj.id}><input type="checkbox" defaultChecked={obj.isChecked} onChange={(e)=>{this.props.toggle(obj.id)}} />
+                                <div key={obj.id}><input type="checkbox" defaultChecked={obj.isChecked == COMPLETED}
+                                                         onChange={(e) => {
+                                                             this.props.toggle(obj.id)
+                                                         }}/>
                                     {obj.task}
                                 </div>
                             );

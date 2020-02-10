@@ -1,18 +1,22 @@
-function getVisibleTodos(tasks,tabId) {
+import {ACTIVE, COMPLETED} from "./App";
+
+export const SHOWALL = "SHOWALL";
+
+function getVisibleTodos(tasks,tabStatus) {
     let visibleTodos = [];
-    if(tabId == 0){
+    if(tabStatus === SHOWALL){
         visibleTodos = tasks;
     }
-    else if(tabId == 1){
+    else if(tabStatus == ACTIVE){
         visibleTodos = tasks.filter((obj)=>{
-            if(!obj.isChecked){
+            if(obj.isChecked == ACTIVE){
                 return 1;
             }
         })
     }
     else{
         visibleTodos = tasks.filter((obj)=>{
-            if(obj.isChecked){
+            if(obj.isChecked == COMPLETED){
                 return 1;
             }
         })

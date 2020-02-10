@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react'
+import {SHOWALL} from "./getVisibleTodos";
+import {ACTIVE, COMPLETED} from "./App";
 
 function Button({changeTab,addTask}){
     return (
@@ -9,13 +11,13 @@ function Button({changeTab,addTask}){
                     Add
                 </button>
             </form>
-            <button onClick={()=>changeTab(0)}>
+            <button onClick={()=>changeTab(SHOWALL)}>
                 all
             </button>
-            <button onClick={()=>changeTab(1)}>
+            <button onClick={()=>changeTab(ACTIVE)}>
                 active
             </button>
-            <button onClick={()=>changeTab(2)}>
+            <button onClick={()=>changeTab(COMPLETED)}>
                 completed
             </button>
         </Fragment>

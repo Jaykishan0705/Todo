@@ -1,18 +1,23 @@
 import React from 'react';
 import './App.css';
 import ShowTasks from "./showtask";
-import getVisibleTodos from "./getVisibleTodos";
+import getVisibleTodos, {SHOWALL} from "./getVisibleTodos";
 import Button from "./Button";
 
+const uuidv1 = require('uuid/v1');
+export const ACTIVE = "ACTIVE";
+export const COMPLETED = "COMPLETED";
+
 class App extends React.Component {
+
     constructor(props) {
         super(props);
-        this.state = {tasks: [], count: 0, tab: 0, taskLeft: 0};
+        this.state = {tasks: [], tab: SHOWALL};
     }
 
-    changeTab = (tabId) => {
+    changeTab = (tabStatus) => {
         this.setState(() => ({
-            tab: tabId
+            tab: tabStatus
         }))
     };
 
@@ -22,47 +27,44 @@ class App extends React.Component {
         newTasks.push(
             {
                 task: event.target['todo-input'].value,
-                isChecked: 0,
-                id: this.state.count + 1
+                isChecked: ACTIVE,
+                id: uuidv1()
             }
         );
-        let newCount = this.state.count + 1;
-        let remainingTask = this.state.taskLeft;
         this.setState(() => ({
             tasks: newTasks,
-            count: newCount,
-            taskLeft: remainingTask + 1
         }));
         event.target['todo-input'].value = '';
     };
 
     toggleTodo = (id1) => {
         let newTasks = this.state.tasks;
-        let taskleft = 0;
         newTasks.forEach((obj) => {
             if (obj.id == id1) {
-                obj.isChecked = !obj.isChecked;
-            }
-            if (!obj.isChecked) {
-                taskleft++;
+                if (obj.isChecked === ACTIVE) {
+                    obj.isChecked = COMPLETED;
+                } else {
+                    obj.isChecked = ACTIVE;
+                }
             }
         });
-        let newCount = this.state.count;
         this.setState(() => ({
             tasks: newTasks,
-            count: newCount,
-            taskLeft: taskleft
         }));
     };
     clearTodos = () => {
         const newTask = this.state.tasks.filter((obj) => {
-            return !obj.isChecked
+            return obj.isChecked !== COMPLETED
         });
-        let sz = newTask.length;
         this.setState(() => ({
             tasks: newTask,
-            taskLeft: sz
         }))
+    };
+
+    remainingTask = () => {
+        return this.state.tasks.filter((task) => {
+            return task.isChecked !== COMPLETED
+        }).length
     };
 
 
@@ -72,7 +74,7 @@ class App extends React.Component {
             <div>
                 <Button changeTab={this.changeTab} addTask={this.addTask}/>
                 <ShowTasks tasks={visibleTodos} toggle={this.toggleTodo}/>
-                <p>{this.state.taskLeft} item left</p>
+                <p> {this.remainingTask()} item left</p>
                 <button onClick={this.clearTodos}> Clear Completed</button>
             </div>
         )
