@@ -1,22 +1,21 @@
 import {ACTIVE, COMPLETED} from "./App";
 
-export const SHOWALL = "SHOWALL";
-
-function getVisibleTodos(tasks,tabStatus) {
+function getVisibleTodos(state) {
+    const {activeTab,tasks} = state;
     let visibleTodos = [];
-    if(tabStatus === SHOWALL){
+    if(activeTab === 'SHOWALL'){
         visibleTodos = tasks;
     }
-    else if(tabStatus == ACTIVE){
+    else if(activeTab == ACTIVE){
         visibleTodos = tasks.filter((obj)=>{
-            if(obj.isChecked == ACTIVE){
+            if(obj.todoStatus == ACTIVE){
                 return 1;
             }
         })
     }
     else{
         visibleTodos = tasks.filter((obj)=>{
-            if(obj.isChecked == COMPLETED){
+            if(obj.todoStatus == COMPLETED){
                 return 1;
             }
         })

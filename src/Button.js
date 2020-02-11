@@ -1,26 +1,31 @@
-import React, { Fragment } from 'react'
-import {SHOWALL} from "./getVisibleTodos";
-import {ACTIVE, COMPLETED} from "./App";
+import React, {Fragment} from 'react'
+import {ACTIVE, CHANGETAB, COMPLETED,SHOWALL} from "./App";
 
-function Button({changeTab,addTask}){
+function Button({dispatch}) {
     return (
-        <Fragment>
-            <form onSubmit={addTask}>
-                <input type = "text" name={"todo-input"} />
+        <div>
+            <form onSubmit={(event) => {
+                event.preventDefault();
+                dispatch({type: 'ADDTODO', text: event.target['todo-input'].value})
+                {event.target['todo-input'].value = ''}
+            }}>
+                <input type="text" name={"todo-input"}/>
                 <button type="submit">
                     Add
                 </button>
             </form>
-            <button onClick={()=>changeTab(SHOWALL)}>
+
+            <button onClick={() => dispatch({type: CHANGETAB, tab: SHOWALL})}>
                 all
             </button>
-            <button onClick={()=>changeTab(ACTIVE)}>
+            <button onClick={() => dispatch({type: CHANGETAB, tab: ACTIVE})}>
                 active
             </button>
-            <button onClick={()=>changeTab(COMPLETED)}>
+            <button onClick={() => dispatch({type: CHANGETAB, tab: COMPLETED})}>
                 completed
             </button>
-        </Fragment>
+        </div>
+
     )
 }
 

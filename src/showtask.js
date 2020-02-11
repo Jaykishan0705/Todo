@@ -1,32 +1,29 @@
 import React from "react";
 import {COMPLETED} from "./App";
+import getVisibleTodos from "./getVisibleTodos";
 
-class ShowTasks extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+function ShowTasks({state,dispatch}) {
 
-    render() {
-        return (
-            <div>
-                <ul>
-                    {
-                        this.props.tasks.map((obj) => {
-                            return (
-                                <div key={obj.id}><input type="checkbox" defaultChecked={obj.isChecked == COMPLETED}
-                                                         onChange={(e) => {
-                                                             this.props.toggle(obj.id)
-                                                         }}/>
-                                    {obj.task}
-                                </div>
-                            );
-                        })
-                    }
-                </ul>
-            </div>
-        );
-    }
-
+    const visibleTodos = getVisibleTodos(state);
+    return (
+        <div>
+            <ul>
+                {
+                    visibleTodos.map((obj) => {
+                        return (
+                            <div key={obj.id}>
+                                <input type="checkbox" defaultChecked={obj.todoStatus == COMPLETED}
+                                       onChange={(e) => {
+                                           dispatch({type: 'TOGGLE_TODO', id: obj.id})
+                                       }}/>
+                                {obj.todo}
+                            </div>
+                        );
+                    })
+                }
+            </ul>
+        </div>
+    )
 }
 
 export default ShowTasks

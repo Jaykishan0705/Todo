@@ -1,84 +1,39 @@
-import React from 'react';
+import React, {useReducer} from 'react';
 import './App.css';
 import ShowTasks from "./showtask";
-import getVisibleTodos, {SHOWALL} from "./getVisibleTodos";
 import Button from "./Button";
-
-const uuidv1 = require('uuid/v1');
+import reducer from "./reducer";
 export const ACTIVE = "ACTIVE";
 export const COMPLETED = "COMPLETED";
+export const CHANGETAB = 'CHANGE_TAB';
+export const CLEAR_COMPLETEDTODO = 'CLEAR_COMPLETEDTODO';
+export const SHOWALL = 'SHOWALL';
+export const ADDTODO = 'ADDTODO';
+export const TOGGLE_TODO = 'TOGGLE_TODO';
 
-class App extends React.Component {
+const initialState = {
+    tasks: [],
+    activeTab: SHOWALL,
+};
 
-    constructor(props) {
-        super(props);
-        this.state = {tasks: [], tab: SHOWALL};
-    }
+function remainingTask(tasks) {
+    return tasks.filter((task)=>{
+        return task.todoStatus === ACTIVE;
+    }).length
+}
 
-    changeTab = (tabStatus) => {
-        this.setState(() => ({
-            tab: tabStatus
-        }))
-    };
+function App() {
 
-    addTask = (event) => {
-        event.preventDefault();
-        let newTasks = this.state.tasks;
-        newTasks.push(
-            {
-                task: event.target['todo-input'].value,
-                isChecked: ACTIVE,
-                id: uuidv1()
-            }
-        );
-        this.setState(() => ({
-            tasks: newTasks,
-        }));
-        event.target['todo-input'].value = '';
-    };
+    const [state, dispatch] = useReducer(reducer,initialState);
 
-    toggleTodo = (id1) => {
-        let newTasks = this.state.tasks;
-        newTasks.forEach((obj) => {
-            if (obj.id == id1) {
-                if (obj.isChecked === ACTIVE) {
-                    obj.isChecked = COMPLETED;
-                } else {
-                    obj.isChecked = ACTIVE;
-                }
-            }
-        });
-        this.setState(() => ({
-            tasks: newTasks,
-        }));
-    };
-    clearTodos = () => {
-        const newTask = this.state.tasks.filter((obj) => {
-            return obj.isChecked !== COMPLETED
-        });
-        this.setState(() => ({
-            tasks: newTask,
-        }))
-    };
-
-    remainingTask = () => {
-        return this.state.tasks.filter((task) => {
-            return task.isChecked !== COMPLETED
-        }).length
-    };
-
-
-    render() {
-        let visibleTodos = getVisibleTodos(this.state.tasks, this.state.tab);
-        return (
-            <div>
-                <Button changeTab={this.changeTab} addTask={this.addTask}/>
-                <ShowTasks tasks={visibleTodos} toggle={this.toggleTodo}/>
-                <p> {this.remainingTask()} item left</p>
-                <button onClick={this.clearTodos}> Clear Completed</button>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <Button dispatch={dispatch} />
+            <ShowTasks state={state} dispatch={dispatch}/>
+            <p> {remainingTask(state.tasks)} item left</p>
+            <button onClick={()=>dispatch({type: CLEAR_COMPLETEDTODO})}> Clear Completed</button>
+        </div>
+    );
 }
 
 export default App;
