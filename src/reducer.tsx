@@ -1,16 +1,31 @@
-import {ACTIVE, ADDTODO, CHANGETAB, CLEAR_COMPLETEDTODO, COMPLETED, TOGGLE_TODO} from "./App";
+import {
+    ACTIVE,
+    ADD_TODO,
+    CHANGETAB,
+    CLEAR_COMPLETED_TODO,
+    COMPLETED,
+    taskInterface,
+    TOGGLE_TODO,
+    addAction,
+    toggleAction,
+    changTabAction,
+    clearAllTodo,
+    stateInterface
+} from "./actions";
 const uuidv1 = require('uuid/v1');
 
-export default function reducer(state,action) {
+type dispactchAction = addAction | toggleAction | changTabAction | clearAllTodo
+
+export default function reducer(state: stateInterface,action: dispactchAction):stateInterface {
     switch (action.type) {
-        case ADDTODO:
+        case ADD_TODO:
             const currentTasks = state.tasks;
             return {
                 ...state,
                 tasks: [
                     ...currentTasks,
                     {
-                        todo: action.text,
+                        todo: action.text as string,
                         id: uuidv1(),
                         todoStatus: ACTIVE
                     }
@@ -19,7 +34,7 @@ export default function reducer(state,action) {
         case TOGGLE_TODO: {
             return {
                 ...state,
-                tasks: state.tasks.map((task)=>{
+                tasks: state.tasks.map((task:taskInterface)=>{
                     if(task.id === action.id){
                         return {
                             ...task,
@@ -33,12 +48,12 @@ export default function reducer(state,action) {
         case CHANGETAB:
             return {
                 ...state,
-                activeTab: action.tab
+                activeTab: action.tab as string
             };
-        case CLEAR_COMPLETEDTODO:
+        case CLEAR_COMPLETED_TODO:
             return {
                 ...state,
-                tasks: state.tasks.filter((task)=>{
+                tasks: state.tasks.filter((task:taskInterface)=>{
                     return task.todoStatus === ACTIVE
                 })
             };

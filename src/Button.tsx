@@ -1,15 +1,19 @@
-import React, {Fragment} from 'react'
-import {ACTIVE, CHANGETAB, COMPLETED,SHOWALL} from "./App";
+import React, {FormEvent} from 'react'
+import {ACTIVE, ADD_TODO, addAction, changTabAction, CHANGETAB, COMPLETED, SHOWALL, ButtonProps,} from "./actions";
 
-function Button({dispatch}) {
+const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
+    const {dispatch} = props;
     return (
         <div>
-            <form onSubmit={(event) => {
+            <form onSubmit={(event: any) => {
                 event.preventDefault();
-                dispatch({type: 'ADDTODO', text: event.target['todo-input'].value})
-                {event.target['todo-input'].value = ''}
+
+                dispatch({type: ADD_TODO, text: event.target["todo-input"].value});
+                {
+                    event.target["todo-input"].value = ''
+                }
             }}>
-                <input type="text" name={"todo-input"}/>
+                <input type="text" name={"todo-input"} />
                 <button type="submit">
                     Add
                 </button>
@@ -25,8 +29,8 @@ function Button({dispatch}) {
                 completed
             </button>
         </div>
-
     )
+
 }
 
 export default Button;

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "jsx": "react"
+  },
+  "include": ["./src/**/*"]
+}
