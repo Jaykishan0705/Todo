@@ -3,7 +3,7 @@ import './App.css';
 import ShowTasks from "./showtask";
 import Button from "./Button";
 import reducer from "./reducer";
-import {SHOWALL, ACTIVE, CLEAR_COMPLETED_TODO, taskInterface, stateInterface, ADD_TODO, CHANGETAB, COMPLETED} from "./actions";
+import {SHOWALL, ACTIVE, CLEAR_COMPLETED_TODO, taskInterface, stateInterface} from "./actions";
 import getVisibleTodos from "./getVisibleTodos";
 
 let initialState : stateInterface = {

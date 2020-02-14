@@ -29,16 +29,4 @@ const getVisibleTodos = createSelector([_.property('state')],
     }
 );
 
-// const getVisibleTodos = (state: stateInterface)=>{
-//
-//     const activeTab: string = state.activeTab;
-//     const tasks: taskInterface[] = state.tasks;
-//     let visibleTodos: taskInterface[] = [];
-//
-//     const memoizedGetVisibleTodos = (): void => createSelector([activeTab,tasks],
-//     memoizedGetVisibleTodos();
-//     return visibleTodos;
-// };
-
-
 export default getVisibleTodos;

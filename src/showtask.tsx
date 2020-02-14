@@ -8,8 +8,8 @@ interface Props {
 
 const ShowTasks: React.FC<Props> = (props: Props) => {
     const {visibleTodos,dispatch} = props;
-    const t = useCallback((e)=>{
-        dispatch({type: TOGGLE_TODO, id: e.target.dataset.jk})
+    const toggleTodo = useCallback((e)=>{
+        dispatch({type: TOGGLE_TODO, id: e.target.dataset.id})
     },[]);
     return (
         <div>
@@ -19,7 +19,7 @@ const ShowTasks: React.FC<Props> = (props: Props) => {
                         return (
                             <div key={todoitem.id}>
                                 <input type="checkbox" defaultChecked={todoitem.todoStatus == COMPLETED}
-                                       onChange={t} data-jk={todoitem.id} />
+                                       onChange={toggleTodo} data-id={todoitem.id} />
                                 {todoitem.todo}
                             </div>
                         )

@@ -31,6 +31,6 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
         </div>
     )
 
-}
+};
 
 export default Button;
