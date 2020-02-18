@@ -1,22 +1,13 @@
-import {
-    ACTIVE,
-    ADD_TODO,
-    CHANGETAB,
-    CLEAR_COMPLETED_TODO,
-    COMPLETED,
-    taskInterface,
-    TOGGLE_TODO,
-    addAction,
-    toggleAction,
-    changTabAction,
-    clearAllTodo,
-    stateInterface
-} from "./actions";
-const uuidv1 = require('uuid/v1');
+import {ACTION_TYPES} from "./actionTypes";
+import {TODO_STATUS} from "./todoStatus";
+import {DispatchInterface} from "./interface";
+import {StateInterface, TaskInterface} from "./interface";
+import uniqueId from "uuid/v1"
 
-type dispactchAction = addAction | toggleAction | changTabAction | clearAllTodo
+const {ACTIVE_TODO,COMPLETED_TODO} = TODO_STATUS;
+const {CHANGE_FILTER,ADD_TODO,TOGGLE_TODO,CLEAR_COMPLETED_TODO} = ACTION_TYPES;
 
-export default function reducer(state: stateInterface,action: dispactchAction):stateInterface {
+export default function reducer(state: StateInterface, action: DispatchInterface): StateInterface {
     switch (action.type) {
         case ADD_TODO:
             const currentTasks = state.tasks;
@@ -25,37 +16,35 @@ export default function reducer(state: stateInterface,action: dispactchAction):s
                 tasks: [
                     ...currentTasks,
                     {
-                        todo: action.text as string,
-                        id: uuidv1(),
-                        todoStatus: ACTIVE
+                        todo: action.payload.text as string,
+                        id: uniqueId(),
+                        todoStatus: ACTIVE_TODO
                     }
                 ]
             };
         case TOGGLE_TODO: {
             return {
                 ...state,
-                tasks: state.tasks.map((task:taskInterface)=>{
-                    if(task.id === action.id){
+                tasks: state.tasks.map((task:TaskInterface)=>{
+                    if(task.id === action.payload.id){
                         return {
                             ...task,
-                            todoStatus: task.todoStatus === ACTIVE ? COMPLETED : ACTIVE
-                        }
+                            todoStatus: task.todoStatus === ACTIVE_TODO ? COMPLETED_TODO : ACTIVE_TODO
+                        };
                     }
                     return task;
                 })
             }
         }
-        case CHANGETAB:
+        case CHANGE_FILTER:
             return {
                 ...state,
-                activeTab: action.tab as string
+                activeTab: action.payload.tab as string
             };
         case CLEAR_COMPLETED_TODO:
             return {
                 ...state,
-                tasks: state.tasks.filter((task:taskInterface)=>{
-                    return task.todoStatus === ACTIVE
-                })
+                tasks: state.tasks.filter((task: TaskInterface) => task.todoStatus === ACTIVE_TODO)
             };
         default:
             return state;
