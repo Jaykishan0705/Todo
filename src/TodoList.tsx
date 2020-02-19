@@ -2,14 +2,14 @@ import React, {useCallback} from "react";
 import {TaskInterface} from "./interface";
 import {TODO_STATUS} from "./todoStatus";
 
-interface Props {
+interface TodoListProps {
     todos: TaskInterface[];
     onTodoClick: (id: string) => void
 }
 
 const {COMPLETED_TODO} = TODO_STATUS;
 
-const TodoList: React.FC<Props> = (props: Props): JSX.Element => {
+const TodoList: React.FC<TodoListProps> = (props: TodoListProps): JSX.Element => {
     const {todos} = props;
     const onToggleTodo = useCallback(event => props.onTodoClick(event.target.dataset.id), [props.onTodoClick]);
     return (

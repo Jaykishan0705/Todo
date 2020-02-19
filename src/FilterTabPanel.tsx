@@ -4,11 +4,11 @@ import {VISIBILLITY_FILTERS} from "./visibilityFilter";
 
 const {SHOW_ALL, ACTIVE, COMPLETED} = VISIBILLITY_FILTERS;
 
-interface Props {
+interface FilterTabPanelProps {
     onTabChange: (tab: string) => void
 }
 
-const FilterTabPanel: React.FC<Props> = (props: Props) => {
+const FilterTabPanel: React.FC<FilterTabPanelProps> = (props: FilterTabPanelProps) => {
     return (
         <>
             <FilterTab tab={SHOW_ALL} text={"All"} onTabChange={props.onTabChange}/>
