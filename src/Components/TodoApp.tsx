@@ -5,7 +5,7 @@ import FilterTabPanel from "./FilterTabPanel";
 import reducer from "../reducer";
 import getVisibleTodos from "../getVisibleTodos";
 
-import {IState, ITask} from "../Constants/type";
+import {IState, ITask} from "../type";
 import {POSSIBLE_ACTION_TYPES} from "../Constants/actionTypes";
 import {POSSIBLR_VISIBILLITY_FILTERS} from "../Constants/visibilityFilter";
 import {POSSIBLE_TODO_STATUS} from "../Constants/todoStatus";
@@ -24,13 +24,13 @@ const initialState: IState = {
 function TodoApp() {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const clearCompletedTodos = useCallback(()=> dispatch({type: CLEAR_COMPLETED_TODO, payload: {}}),[]);
+    const clearCompletedTodos = useCallback(()=> dispatch({type: CLEAR_COMPLETED_TODO}),[]);
 
     const onTabChange = useCallback((tab: string)=> dispatch({type: CHANGE_FILTER, payload: {tab}}),[]);
 
     const submitTodo = useCallback(todo=> dispatch({type: ADD_TODO, payload: {text: todo}}),[]);
 
-    const toggleTodo = useCallback((id: string)=> dispatch({type: TOGGLE_TODO, payload: {id: id}}), []);
+    const toggleTodo = useCallback((id: string)=> dispatch({type: TOGGLE_TODO, payload: {id}}), []);
 
     const remainingTask =useMemo(()=> state.tasks.filter((task: ITask) => task.todoStatus === ACTIVE_TODO).length,[state.tasks]);
 

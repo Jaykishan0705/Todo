@@ -9,7 +9,7 @@ interface IFilterTabProps {
 const FilterTab: React.FC<IFilterTabProps> = (
         props: IFilterTabProps
 ): JSX.Element => {
-    const {onTabChange} = props; //change
+    const {onTabChange} = props;
 
     const onTabClick = useCallback(()=>onTabChange(props.tabOption),[onTabChange]);
 

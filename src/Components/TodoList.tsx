@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 import {POSSIBLE_TODO_STATUS} from "../Constants/todoStatus";
-import {ITask} from "../Constants/type";
+import {ITask} from "../type";
 
 interface ITodoListProps {
     todos: ITask[];
@@ -16,13 +16,13 @@ const TodoList: React.FC<ITodoListProps> = (props: ITodoListProps): JSX.Element 
         <>
             <ul>
                 {
-                    todos.map((todo: ITask) => {
+                    todos.map((task: ITask) => {
                         return (
-                            <div key={todo.id}>
-                                <input type="checkbox" defaultChecked={todo.todoStatus === COMPLETED_TODO}
+                            <div key={task.id}>
+                                <input type="checkbox" defaultChecked={task.todoStatus === COMPLETED_TODO}
                                        onChange={onToggleTodo}
-                                       data-id={todo.id}/>
-                                {todo.todo}
+                                       data-id={task.id}/>
+                                {task.todo}
                             </div>
                         )
                     })

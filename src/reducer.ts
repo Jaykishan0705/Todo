@@ -1,7 +1,7 @@
 import uniqueId from "uuid/v1"
 import {POSSIBLE_ACTION_TYPES} from "./Constants/actionTypes";
 import {POSSIBLE_TODO_STATUS} from "./Constants/todoStatus";
-import {ActionType, IState, ITask} from "./Constants/type";
+import {ActionType, IState, ITask} from "./type";
 
 const {ACTIVE_TODO,COMPLETED_TODO} = POSSIBLE_TODO_STATUS;
 const {CHANGE_FILTER,ADD_TODO,TOGGLE_TODO,CLEAR_COMPLETED_TODO} = POSSIBLE_ACTION_TYPES;

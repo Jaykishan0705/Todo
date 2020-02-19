@@ -1,6 +1,6 @@
 import {POSSIBLR_VISIBILLITY_FILTERS} from "./Constants/visibilityFilter";
 import {POSSIBLE_TODO_STATUS} from "./Constants/todoStatus";
-import {IState, ITask} from "./Constants/type";
+import {IState, ITask} from "./type";
 
 
 const {SHOW_ALL, ACTIVE, COMPLETED} = POSSIBLR_VISIBILLITY_FILTERS;

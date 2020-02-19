@@ -9,7 +9,6 @@ interface IFilterTabPanelProps {
 }
 
 const FilterTabPanel: React.FC<IFilterTabPanelProps> = (props: IFilterTabPanelProps) => {
-
     const tabs = [
         {
             tabOption: SHOW_ALL,
@@ -26,7 +25,7 @@ const FilterTabPanel: React.FC<IFilterTabPanelProps> = (props: IFilterTabPanelPr
     ];
     return (
         <>
-            {tabs.map(tab => < FilterTab tabOption={tab.tabOption} text={tab.text} onTabChange={props.onTabChange} />)}
+            {tabs.map(tab => <FilterTab tabOption={tab.tabOption} text={tab.text} onTabChange={props.onTabChange} />)}
         </>
     )
 };

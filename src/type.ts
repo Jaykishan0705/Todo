@@ -1,5 +1,5 @@
-import {POSSIBLE_ACTION_TYPES} from "./actionTypes";
-import {POSSIBLE_TODO_STATUS} from "./todoStatus";
+import {POSSIBLE_ACTION_TYPES} from "./Constants/actionTypes";
+import {POSSIBLE_TODO_STATUS} from "./Constants/todoStatus";
 
 const {ADD_TODO,TOGGLE_TODO,CLEAR_COMPLETED_TODO,CHANGE_FILTER} = POSSIBLE_ACTION_TYPES;
 const {ACTIVE_TODO,COMPLETED_TODO} = POSSIBLE_TODO_STATUS;
@@ -38,9 +38,6 @@ interface IChangTabAction {
 
 interface IClearCompletedTodoAction {
     type: typeof CLEAR_COMPLETED_TODO;
-    payload: {
-
-    }
 }
 
 export type ActionType = IAddAction | IToggleAction | IChangTabAction | IClearCompletedTodoAction
