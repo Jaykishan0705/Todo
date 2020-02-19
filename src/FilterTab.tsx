@@ -1,21 +1,21 @@
 import React, {useCallback} from "react";
 
-interface Props {
+interface FilterTabProps {
     tab: string;
-    buttonText: string
+    text: string
     onTabChange: (tab: string)=>void
 }
 
-const FilterTab: React.FC<Props> = (
-        props: Props
+const FilterTab: React.FC<FilterTabProps> = (
+        props: FilterTabProps
 ): JSX.Element => {
-    const {onTabChange} = props;
+    const {onTabChange} = props; //change
 
-    const tabChange = useCallback(()=>onTabChange(props.tab),[onTabChange]);
+    const onTabClick = useCallback(()=>onTabChange(props.tab),[onTabChange]);
 
     return (
-        <button onClick={tabChange}>
-            {props.buttonText}
+        <button onClick={onTabClick}>
+            {props.text}
         </button>
     )
 };

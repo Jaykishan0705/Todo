@@ -3,4 +3,4 @@ export const ACTION_TYPES = {
     ADD_TODO: '@@action/ADD_TODO',
     TOGGLE_TODO: '@@action/TOGGLE_TODO',
     CLEAR_COMPLETED_TODO: '@@action/CLEAR_COMPLETED_TODO'
- };
+ } as const;

@@ -1,13 +1,13 @@
 import {ACTION_TYPES} from "./actionTypes";
 import {TODO_STATUS} from "./todoStatus";
-import {DispatchInterface} from "./interface";
-import {StateInterface, TaskInterface} from "./interface";
+
+import {ActionType, StateInterface, TaskInterface} from "./interface";
 import uniqueId from "uuid/v1"
 
 const {ACTIVE_TODO,COMPLETED_TODO} = TODO_STATUS;
 const {CHANGE_FILTER,ADD_TODO,TOGGLE_TODO,CLEAR_COMPLETED_TODO} = ACTION_TYPES;
 
-export default function reducer(state: StateInterface, action: DispatchInterface): StateInterface {
+export default function reducer(state: StateInterface, action: ActionType): StateInterface {
     switch (action.type) {
         case ADD_TODO:
             const currentTasks = state.tasks;
@@ -16,7 +16,7 @@ export default function reducer(state: StateInterface, action: DispatchInterface
                 tasks: [
                     ...currentTasks,
                     {
-                        todo: action.payload.text as string,
+                        todo: action.payload.text,
                         id: uniqueId(),
                         todoStatus: ACTIVE_TODO
                     }
@@ -39,7 +39,7 @@ export default function reducer(state: StateInterface, action: DispatchInterface
         case CHANGE_FILTER:
             return {
                 ...state,
-                activeTab: action.payload.tab as string
+                activeTab: action.payload.tab
             };
         case CLEAR_COMPLETED_TODO:
             return {

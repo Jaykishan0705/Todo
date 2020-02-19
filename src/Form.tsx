@@ -2,11 +2,11 @@ import React, {useCallback} from 'react'
 
 export const TODO_INPUT = "todo-input";
 
-interface Props {
+interface FormProps {
     submitTodo: (todo: string)=> void
 }
 
-const Form: React.FC<Props> = (props: Props) => {
+const Form: React.FC<FormProps> = (props) => {
 
     const onSubmitTodo = useCallback(event => {
         event.preventDefault();
@@ -15,14 +15,14 @@ const Form: React.FC<Props> = (props: Props) => {
     },[props.submitTodo]);
 
    return (
-        <div>
+        <>
             <form onSubmit={onSubmitTodo}>
                 <input type="text" name={TODO_INPUT}/>
                 <button type="submit">
                     Add
                 </button>
             </form>
-        </div>
+        </>
     )
 };
 

@@ -22,10 +22,7 @@ const initialState: StateInterface = {
 };
 
 function TodoApp() {
-
     const [state, dispatch] = useReducer(reducer, initialState);
-
-    const visibleTodos: TaskInterface[] = useMemo(()=> getVisibleTodos(state),[state]);
 
     const clearCompletedTodos = useCallback(()=> dispatch({type: CLEAR_COMPLETED_TODO, payload: {}}),[]);
 
@@ -37,11 +34,13 @@ function TodoApp() {
 
     const remainingTask =useMemo(()=> state.tasks.filter((task: TaskInterface) => task.todoStatus === ACTIVE_TODO).length,[state.tasks]);
 
+    const visibleTodos: TaskInterface[] = useMemo(()=> getVisibleTodos(state),[state]);
+
     return (
         <div>
             <Form submitTodo={submitTodo}/>
             <FilterTabPanel onTabChange={onTabChange}/>
-            <TodoList todos={visibleTodos} toggleTodo={toggleTodo} />
+            <TodoList todos={visibleTodos} onTodoClick={toggleTodo} />
             <p> {remainingTask} item left</p>
             <button onClick={clearCompletedTodos}> Clear Completed </button>
         </div>

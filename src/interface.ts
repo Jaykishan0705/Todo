@@ -15,37 +15,44 @@ export interface StateInterface {
     activeTab: string
 }
 
-type dispatchType = typeof ADD_TODO | typeof TOGGLE_TODO | typeof CLEAR_COMPLETED_TODO | typeof CHANGE_FILTER
+// type dispatchType = typeof ADD_TODO | typeof TOGGLE_TODO | typeof CLEAR_COMPLETED_TODO | typeof CHANGE_FILTER
+//
+// interface PayloadInterface {
+//     text?: string,
+//     tab?: string,
+//     id?: string
+// }
 
-interface PayloadInterface {
-    text?: string,
-    tab?: string,
-    id?: string
+
+interface AddAction  {
+    type: typeof ADD_TODO;
+    payload: {
+        text: string;
+    }
 }
 
-export interface DispatchInterface{
-    type: dispatchType
-    payload: PayloadInterface
+interface ToggleAction {
+    type: typeof TOGGLE_TODO;
+    payload: {
+        id: string;
+    }
 }
 
-// export interface AddAction {
-//     type: typeof ADD_TODO;
-//     payload: PayloadInterface
-// }
+interface ChangTabAction {
+    type: typeof CHANGE_FILTER;
+    payload: {
+        tab: string;
+    }
+}
 
-// export interface ToggleAction {
-//     type: typeof TOGGLE_TODO;
-//     payload: PayloadInterface
-// }
+interface ClearCompletedTodoAction {
+    type: typeof CLEAR_COMPLETED_TODO;
+    payload: {
 
-// export interface ChangTabAction {
-//     type: typeof CHANGE_FILTER;
-//     payload: PayloadInterface
-// }
+    }
+}
 
-// export interface ButtonProps {
-//     dispatch: (action: AddAction | ChangTabAction) => void
-// }
+export type ActionType = AddAction | ToggleAction | ChangTabAction | ClearCompletedTodoAction
 
 
 

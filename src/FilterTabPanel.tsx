@@ -11,9 +11,9 @@ interface Props {
 const FilterTabPanel: React.FC<Props> = (props: Props) => {
     return (
         <>
-            <FilterTab tab={SHOW_ALL} buttonText={"All"} onTabChange={props.onTabChange}/>
-            <FilterTab tab={ACTIVE} buttonText={"Active"} onTabChange={props.onTabChange}/>
-            <FilterTab tab={COMPLETED} buttonText={"Completed"} onTabChange={props.onTabChange}/>
+            <FilterTab tab={SHOW_ALL} text={"All"} onTabChange={props.onTabChange}/>
+            <FilterTab tab={ACTIVE} text={"Active"} onTabChange={props.onTabChange}/>
+            <FilterTab tab={COMPLETED} text={"Completed"} onTabChange={props.onTabChange}/>
         </>
     )
 };

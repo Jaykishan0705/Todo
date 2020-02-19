@@ -4,17 +4,16 @@ import {TODO_STATUS} from "./todoStatus";
 
 interface Props {
     todos: TaskInterface[];
-    toggleTodo: (id: string) => void
+    onTodoClick: (id: string) => void
 }
 
 const {COMPLETED_TODO} = TODO_STATUS;
 
-
 const TodoList: React.FC<Props> = (props: Props): JSX.Element => {
     const {todos} = props;
-    const onToggleTodo = useCallback(event => props.toggleTodo(event.target.dataset.id), [props.toggleTodo]);
+    const onToggleTodo = useCallback(event => props.onTodoClick(event.target.dataset.id), [props.onTodoClick]);
     return (
-        <div>
+        <>
             <ul>
                 {
                     todos.map((todo: TaskInterface) => {
@@ -29,7 +28,7 @@ const TodoList: React.FC<Props> = (props: Props): JSX.Element => {
                     })
                 }
             </ul>
-        </div>
+        </>
     )
 };
 
