@@ -1,22 +1,22 @@
 import React, {useCallback} from "react";
-import {TaskInterface} from "./interface";
-import {TODO_STATUS} from "./todoStatus";
+import {POSSIBLE_TODO_STATUS} from "../Constants/todoStatus";
+import {ITask} from "../Constants/type";
 
-interface TodoListProps {
-    todos: TaskInterface[];
+interface ITodoListProps {
+    todos: ITask[];
     onTodoClick: (id: string) => void
 }
 
-const {COMPLETED_TODO} = TODO_STATUS;
+const {COMPLETED_TODO} = POSSIBLE_TODO_STATUS;
 
-const TodoList: React.FC<TodoListProps> = (props: TodoListProps): JSX.Element => {
+const TodoList: React.FC<ITodoListProps> = (props: ITodoListProps): JSX.Element => {
     const {todos} = props;
     const onToggleTodo = useCallback(event => props.onTodoClick(event.target.dataset.id), [props.onTodoClick]);
     return (
         <>
             <ul>
                 {
-                    todos.map((todo: TaskInterface) => {
+                    todos.map((todo: ITask) => {
                         return (
                             <div key={todo.id}>
                                 <input type="checkbox" defaultChecked={todo.todoStatus === COMPLETED_TODO}

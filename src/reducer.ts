@@ -1,13 +1,12 @@
-import {ACTION_TYPES} from "./actionTypes";
-import {TODO_STATUS} from "./todoStatus";
-
-import {ActionType, StateInterface, TaskInterface} from "./interface";
 import uniqueId from "uuid/v1"
+import {POSSIBLE_ACTION_TYPES} from "./Constants/actionTypes";
+import {POSSIBLE_TODO_STATUS} from "./Constants/todoStatus";
+import {ActionType, IState, ITask} from "./Constants/type";
 
-const {ACTIVE_TODO,COMPLETED_TODO} = TODO_STATUS;
-const {CHANGE_FILTER,ADD_TODO,TOGGLE_TODO,CLEAR_COMPLETED_TODO} = ACTION_TYPES;
+const {ACTIVE_TODO,COMPLETED_TODO} = POSSIBLE_TODO_STATUS;
+const {CHANGE_FILTER,ADD_TODO,TOGGLE_TODO,CLEAR_COMPLETED_TODO} = POSSIBLE_ACTION_TYPES;
 
-export default function reducer(state: StateInterface, action: ActionType): StateInterface {
+export default function reducer(state: IState, action: ActionType): IState {
     switch (action.type) {
         case ADD_TODO:
             const currentTasks = state.tasks;
@@ -25,7 +24,7 @@ export default function reducer(state: StateInterface, action: ActionType): Stat
         case TOGGLE_TODO: {
             return {
                 ...state,
-                tasks: state.tasks.map((task:TaskInterface)=>{
+                tasks: state.tasks.map((task:ITask)=>{
                     if(task.id === action.payload.id){
                         return {
                             ...task,
@@ -44,7 +43,7 @@ export default function reducer(state: StateInterface, action: ActionType): Stat
         case CLEAR_COMPLETED_TODO:
             return {
                 ...state,
-                tasks: state.tasks.filter((task: TaskInterface) => task.todoStatus === ACTIVE_TODO)
+                tasks: state.tasks.filter((task: ITask) => task.todoStatus === ACTIVE_TODO)
             };
         default:
             return state;

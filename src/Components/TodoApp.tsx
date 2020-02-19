@@ -1,22 +1,22 @@
 import React, { useCallback, useMemo, useReducer} from 'react';
 import TodoList from "./TodoList";
-import Form from "./Form";
-import reducer from "./reducer";
-import getVisibleTodos from "./getVisibleTodos";
+import TodoInputForm from "./TodoInputForm";
 import FilterTabPanel from "./FilterTabPanel";
+import reducer from "../reducer";
+import getVisibleTodos from "../getVisibleTodos";
 
-import {TaskInterface, StateInterface} from "./interface";
-import {ACTION_TYPES} from "./actionTypes";
-import {VISIBILLITY_FILTERS} from "./visibilityFilter";
-import {TODO_STATUS} from "./todoStatus";
+import {IState, ITask} from "../Constants/type";
+import {POSSIBLE_ACTION_TYPES} from "../Constants/actionTypes";
+import {POSSIBLR_VISIBILLITY_FILTERS} from "../Constants/visibilityFilter";
+import {POSSIBLE_TODO_STATUS} from "../Constants/todoStatus";
 
-import './App.css';
+import '../App.css'
 
-const {ADD_TODO,CLEAR_COMPLETED_TODO,CHANGE_FILTER,TOGGLE_TODO} = ACTION_TYPES;
-const {SHOW_ALL} = VISIBILLITY_FILTERS;
-const {ACTIVE_TODO} = TODO_STATUS;
+const {ADD_TODO,CLEAR_COMPLETED_TODO,CHANGE_FILTER,TOGGLE_TODO} = POSSIBLE_ACTION_TYPES;
+const {SHOW_ALL} = POSSIBLR_VISIBILLITY_FILTERS;
+const {ACTIVE_TODO} = POSSIBLE_TODO_STATUS;
 
-const initialState: StateInterface = {
+const initialState: IState = {
     tasks: [],
     activeTab: SHOW_ALL
 };
@@ -32,13 +32,13 @@ function TodoApp() {
 
     const toggleTodo = useCallback((id: string)=> dispatch({type: TOGGLE_TODO, payload: {id: id}}), []);
 
-    const remainingTask =useMemo(()=> state.tasks.filter((task: TaskInterface) => task.todoStatus === ACTIVE_TODO).length,[state.tasks]);
+    const remainingTask =useMemo(()=> state.tasks.filter((task: ITask) => task.todoStatus === ACTIVE_TODO).length,[state.tasks]);
 
-    const visibleTodos: TaskInterface[] = useMemo(()=> getVisibleTodos(state),[state]);
+    const visibleTodos: ITask[] = useMemo(()=> getVisibleTodos(state),[state]);
 
     return (
         <div>
-            <Form submitTodo={submitTodo}/>
+            <TodoInputForm submitTodo={submitTodo}/>
             <FilterTabPanel onTabChange={onTabChange}/>
             <TodoList todos={visibleTodos} onTodoClick={toggleTodo} />
             <p> {remainingTask} item left</p>

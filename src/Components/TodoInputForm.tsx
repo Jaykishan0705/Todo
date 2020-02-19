@@ -2,11 +2,11 @@ import React, {useCallback} from 'react'
 
 export const TODO_INPUT = "todo-input";
 
-interface FormProps {
+interface IFormProps {
     submitTodo: (todo: string)=> void
 }
 
-const Form: React.FC<FormProps> = (props) => {
+const TodoInputForm: React.FC<IFormProps> = (props) => {
 
     const onSubmitTodo = useCallback(event => {
         event.preventDefault();
@@ -26,4 +26,4 @@ const Form: React.FC<FormProps> = (props) => {
     )
 };
 
-export default Form;
+export default TodoInputForm;
