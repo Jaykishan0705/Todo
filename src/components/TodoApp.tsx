@@ -59,13 +59,13 @@ function TodoApp() {
     },[handleUndoRedoOnKeyDown]);
 
     return (
-        <div className="App">
+        <div className="App bg-white mt-32 mb-10">
             <TodoInputForm submitTodo={submitTodo}/>
             <TodoList todos={visibleTodos} onTodoClick={toggleTodo}/>
-            <div className="footer">
+            <div className="footer flex justify-around items-center font-sans font-light h-12">
                 <p> {remainingTaskCount} item left</p>
                 <FilterTabPanel onTabChange={onTabChange} currentTab={state.activeTab}/>
-                <button className="tab" onClick={clearCompletedTodos}> Clear Completed</button>
+                <button className="tab m-1 p-1 font-sans font-thin" onClick={clearCompletedTodos}> Clear Completed</button>
             </div>
         </div>
     );

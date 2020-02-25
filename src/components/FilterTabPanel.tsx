@@ -25,7 +25,7 @@ const FilterTabPanel: React.FC<IFilterTabPanelProps> = (props: IFilterTabPanelPr
         }
     ];
     return (
-        <div className="tabPanel">
+        <div className="flex justify-evenly items-center w-4/12">
             {tabs.map(tab => <FilterTab tabOption={tab.tabOption} text={tab.text} onTabChange={props.onTabChange} currentTab={props.currentTab} />)}
         </div>
     )

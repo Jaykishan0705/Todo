@@ -13,17 +13,17 @@ const TodoList: React.FC<ITodoListProps> = (props: ITodoListProps): JSX.Element 
     const {todos} = props;
     const onToggleTodo = useCallback(event => {console.log('nken');props.onTodoClick(event.target.dataset.id)}, [props.onTodoClick]);
     return (
-        <ul className="Main">
+        <ul className="Main w-full overflow-auto">
             {
                 todos.map((task: ITask) => {
                     return (
-                        <div className="newtodo" key={task.id}>
-                            <input type="checkbox" checked={task.todoStatus === COMPLETED_TODO}
+                        <div className="newtodo w-full h-auto flex items-center font-sans break-all text-2xl font-thin" key={task.id}>
+                            <input className="absolute opacity-0 ml-4" type="checkbox" checked={task.todoStatus === COMPLETED_TODO}
                                    onChange={onToggleTodo}
                                    data-id={task.id}>
                             </input>
-                            <div className="checkmark" onClick={onToggleTodo} data-id={task.id}></div>
-                            <label className={task.todoStatus ===  COMPLETED_TODO ? "completed-todo":"active-todo"} data-id={task.id} onClick={onToggleTodo}>{task.todo}</label>
+                            <div className="checkmark ml-2 h-6 w-6" onClick={onToggleTodo} data-id={task.id}/>
+                            <label className={task.todoStatus ===  COMPLETED_TODO ? "completed-todo ml-4 transition duration-150": "ml-4 transition duration-150"} data-id={task.id} onClick={onToggleTodo}>{task.todo}</label>
                         </div>
                     )
                 })

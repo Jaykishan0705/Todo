@@ -16,7 +16,7 @@ const TodoInputForm: React.FC<IFormProps> = (props) => {
 
     return (
         <form onSubmit={onSubmitTodo}>
-            <input className="header" type="text" name={TODO_INPUT} placeholder="What needs to be done?"/>
+            <input className="header w-full h-16 p-4 font-sans font-hairline text-2xl leading-5" type="text" name={TODO_INPUT} placeholder="What needs to be done?"/>
         </form>
     )
 };
