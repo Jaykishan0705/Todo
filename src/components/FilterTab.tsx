@@ -3,7 +3,8 @@ import React, {useCallback} from "react";
 interface IFilterTabProps {
     tabOption: string;
     text: string;
-    onTabChange: (tab: string)=>void
+    onTabChange: (tab: string)=>void;
+    currentTab: string;
 }
 
 const FilterTab: React.FC<IFilterTabProps> = (
@@ -14,9 +15,7 @@ const FilterTab: React.FC<IFilterTabProps> = (
     const onTabClick = useCallback(()=>onTabChange(props.tabOption),[onTabChange]);
 
     return (
-        <button onClick={onTabClick}>
-            {props.text}
-        </button>
+        <button className={props.currentTab === props.tabOption ? "tab selected-tab" : "tab not-selected-tab"} onClick={onTabClick} children={props.text} />
     )
 };
 

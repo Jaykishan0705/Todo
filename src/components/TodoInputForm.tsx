@@ -1,9 +1,9 @@
 import React, {useCallback} from 'react'
 
-export const TODO_INPUT = "todo-input";
+const TODO_INPUT = "todo-input";
 
 interface IFormProps {
-    submitTodo: (todo: string)=> void
+    submitTodo: (todo: string) => void
 }
 
 const TodoInputForm: React.FC<IFormProps> = (props) => {
@@ -12,17 +12,12 @@ const TodoInputForm: React.FC<IFormProps> = (props) => {
         event.preventDefault();
         props.submitTodo(event.target[TODO_INPUT].value);
         event.target[TODO_INPUT].value = '';
-    },[props.submitTodo]);
+    }, [props.submitTodo]);
 
-   return (
-        <>
-            <form onSubmit={onSubmitTodo}>
-                <input type="text" name={TODO_INPUT}/>
-                <button type="submit">
-                    Add
-                </button>
-            </form>
-        </>
+    return (
+        <form onSubmit={onSubmitTodo}>
+            <input className="header" type="text" name={TODO_INPUT} placeholder="What needs to be done?"/>
+        </form>
     )
 };
 

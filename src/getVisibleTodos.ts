@@ -1,15 +1,13 @@
-import {POSSIBLR_VISIBILLITY_FILTERS} from "./Constants/visibilityFilter";
-import {POSSIBLE_TODO_STATUS} from "./Constants/todoStatus";
-import {IState, ITask} from "./type";
+import {POSSIBLR_VISIBILLITY_FILTERS} from "./constants/visibilityFilter";
+import {TODO_STATUSES} from "./constants/todoStatus";
+import {IState, ITask} from "./types";
 
 
 const {SHOW_ALL, ACTIVE, COMPLETED} = POSSIBLR_VISIBILLITY_FILTERS;
-const {ACTIVE_TODO, COMPLETED_TODO} = POSSIBLE_TODO_STATUS;
+const {ACTIVE_TODO, COMPLETED_TODO} = TODO_STATUSES;
 
-export default function getVisibleTodos(state: IState) {
+export default function getVisibleTodos(activeTab: IState['activeTab'], tasks: IState['tasks']) {
     let visibleTodos: ITask[] = [];
-    const activeTab = state.activeTab;
-    const tasks = state.tasks;
     switch (activeTab) {
         case SHOW_ALL:
             visibleTodos = tasks;
