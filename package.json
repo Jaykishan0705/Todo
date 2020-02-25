@@ -2,6 +2,7 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Jaykishan0705.github.io/Todo",
   "dependencies": {
     "@babel/core": "^7.8.4",
     "@testing-library/jest-dom": "^4.2.4",
@@ -15,7 +16,6 @@
     "@types/react-tooltip": "^3.11.0",
     "@types/uuid": "^3.4.7",
     "axios": "^0.19.2",
-    "homepage": "https://jaykishan0705.github.io/Todo",
     "gh-pages": "^2.2.0",
     "lodash": "^4.17.15",
     "npm": "^6.13.7",
