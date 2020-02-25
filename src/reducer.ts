@@ -1,7 +1,7 @@
 import uniqueId from "uuid/v1"
 import {ACTION_TYPES} from "./constants/actionTypes";
 import {TODO_STATUSES} from "./constants/todoStatus";
-import {ActionType, IState, ITask} from "./types";
+import {ActionType, IState, ITask,ITodoState} from "./types";
 
 const {ACTIVE_TODO, COMPLETED_TODO} = TODO_STATUSES;
 const {CHANGE_FILTER, ADD_TODO, TOGGLE_TODO, CLEAR_COMPLETED_TODO,UNDO,REDO} = ACTION_TYPES;
@@ -20,7 +20,7 @@ export default function reducer(state: IState, action: ActionType): IState {
                 activeTab: state.activeTab
             };
             const newPastTasks = state.pastState.concat(foo1);
-            const newFutureTask = [];
+            const newFutureTask: ITodoState[] = [];
             return {
                 tasks: foo1.tasks,
                 activeTab: foo1.activeTab,
@@ -46,7 +46,7 @@ export default function reducer(state: IState, action: ActionType): IState {
             };
 
             const newPastTasks = state.pastState.concat(foo1);
-            const newFutureTask = [];
+            const newFutureTask: ITodoState[] = [];
             return {
                 ...foo1,
                 pastState: newPastTasks,
@@ -59,7 +59,7 @@ export default function reducer(state: IState, action: ActionType): IState {
                 activeTab: action.payload.tab
             };
             const newPastTasks = state.pastState.concat(foo1);
-            const newFutureTask = [];
+            const newFutureTask: ITodoState[] = [];
             return {
                 ...foo1,
                 pastState: newPastTasks,
@@ -72,7 +72,7 @@ export default function reducer(state: IState, action: ActionType): IState {
                 tasks: state.tasks.filter((task: ITask) => task.todoStatus === ACTIVE_TODO)
             };
             const newPastTasks = state.pastState.concat(foo1);
-            const newFutureTask = [];
+            const newFutureTask: ITodoState[] = [];
             return {
                 ...foo1,
                 pastState: newPastTasks,

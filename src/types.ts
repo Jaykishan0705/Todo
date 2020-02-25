@@ -10,7 +10,7 @@ export interface ITask {
     todoStatus: typeof ACTIVE_TODO | typeof COMPLETED_TODO
 }
 
-export interface foo {
+export interface ITodoState {
     tasks: ITask[],
     activeTab: string
 }
@@ -18,8 +18,8 @@ export interface foo {
 export interface IState {
     tasks: ITask[],
     activeTab: string,
-    pastState: foo[],
-    futureState: foo[]
+    pastState: ITodoState[],
+    futureState: ITodoState[]
 }
 
 interface IAddAction {
