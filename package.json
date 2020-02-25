@@ -15,6 +15,8 @@
     "@types/react-tooltip": "^3.11.0",
     "@types/uuid": "^3.4.7",
     "axios": "^0.19.2",
+    "homepage": "https://jaykishan0705.github.io/Todo",
+    "gh-pages": "^2.2.0",
     "lodash": "^4.17.15",
     "npm": "^6.13.7",
     "prop-types": "^15.7.2",
@@ -31,7 +33,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:css": "tailwind build src/App.css -o src/App.css"
+    "build:css": "tailwind build src/App.css -o src/App.css",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
