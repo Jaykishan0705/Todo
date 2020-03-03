@@ -15,7 +15,7 @@ const FilterTab: React.FC<IFilterTabProps> = (
     const onTabClick = useCallback(()=>onTabChange(props.tabOption),[onTabChange]);
 
     return (
-        <button className={props.currentTab === props.tabOption ? "tab selected-tab m-1 p-1 font-sans font-thin" : "tab not-selected-tab m-1 p-1 font-sans font-thin"} onClick={onTabClick} children={props.text}/>
+        <button data-testid="2" className={props.currentTab === props.tabOption ? "tab selected-tab m-1 p-1 font-sans font-thin" : "tab not-selected-tab m-1 p-1 font-sans font-thin"} onClick={onTabClick} children={props.text}/>
     )
 };
 

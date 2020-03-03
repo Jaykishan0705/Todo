@@ -4,14 +4,14 @@ import {ITask} from "../types";
 
 interface ITodoListProps {
     todos: ITask[];
-    onTodoClick: (id: string) => void
+    onTodoClick: (id: number) => void
 }
 
 const {COMPLETED_TODO} = TODO_STATUSES;
 
 const TodoList: React.FC<ITodoListProps> = (props: ITodoListProps): JSX.Element => {
     const {todos} = props;
-    const onToggleTodo = useCallback(event => {console.log('nken');props.onTodoClick(event.target.dataset.id)}, [props.onTodoClick]);
+    const onToggleTodo = useCallback(event => {props.onTodoClick(event.target.dataset.id)}, [props.onTodoClick]);
     return (
         <ul className="Main w-full overflow-auto">
             {
@@ -23,7 +23,7 @@ const TodoList: React.FC<ITodoListProps> = (props: ITodoListProps): JSX.Element 
                                    data-id={task.id}>
                             </input>
                             <div className="checkmark ml-2 h-6 w-6" onClick={onToggleTodo} data-id={task.id}/>
-                            <label className={task.todoStatus ===  COMPLETED_TODO ? "completed-todo ml-4 transition duration-150": "ml-4 transition duration-150"} data-id={task.id} onClick={onToggleTodo}>{task.todo}</label>
+                            <label data-testid = {task.id} className={task.todoStatus ===  COMPLETED_TODO ? "completed-todo ml-4 transition duration-150": "ml-4 transition duration-150"} data-id={task.id} onClick={onToggleTodo}>{task.todo}</label>
                         </div>
                     )
                 })

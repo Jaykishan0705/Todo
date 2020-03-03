@@ -1,4 +1,3 @@
-import uniqueId from "uuid/v1"
 import {ACTION_TYPES} from "./constants/actionTypes";
 import {TODO_STATUSES} from "./constants/todoStatus";
 import {ActionType, IState, ITask,ITodoState} from "./types";
@@ -6,12 +5,19 @@ import {ActionType, IState, ITask,ITodoState} from "./types";
 const {ACTIVE_TODO, COMPLETED_TODO} = TODO_STATUSES;
 const {CHANGE_FILTER, ADD_TODO, TOGGLE_TODO, CLEAR_COMPLETED_TODO,UNDO,REDO} = ACTION_TYPES;
 
+let todoId=0;
+
+const uniqueId = ()=> {
+    todoId = todoId + 1;
+    return todoId;
+};
+
 export default function reducer(state: IState, action: ActionType): IState {
 
     switch (action.type) {
         case ADD_TODO: {
             const currentTasks = state.tasks;
-            const foo1 = {
+            const partialState = {
                 tasks: currentTasks.concat({
                     todo: action.payload.text,
                     id: uniqueId(),
@@ -19,17 +25,16 @@ export default function reducer(state: IState, action: ActionType): IState {
                 }),
                 activeTab: state.activeTab
             };
-            const newPastTasks = state.pastState.concat(foo1);
+            const newPastTasks = state.pastState.concat(partialState);
             const newFutureTask: ITodoState[] = [];
             return {
-                tasks: foo1.tasks,
-                activeTab: foo1.activeTab,
+                tasks: partialState.tasks,
+                activeTab: partialState.activeTab,
                 pastState: newPastTasks,
                 futureState: newFutureTask
             }
         }
         case TOGGLE_TODO: {
-
             const newTask = state.tasks.map((task: ITask) => {
                 if (task.id === action.payload.id) {
                     return {
@@ -40,41 +45,41 @@ export default function reducer(state: IState, action: ActionType): IState {
                 return task;
             });
 
-            const foo1 = {
+            const partialState = {
                 tasks: newTask,
                 activeTab: state.activeTab
             };
 
-            const newPastTasks = state.pastState.concat(foo1);
+            const newPastTasks = state.pastState.concat(partialState);
             const newFutureTask: ITodoState[] = [];
             return {
-                ...foo1,
+                ...partialState,
                 pastState: newPastTasks,
                 futureState: newFutureTask
             }
         }
         case CHANGE_FILTER: {
-            const foo1 = {
+            const partialState = {
                 tasks: state.tasks,
                 activeTab: action.payload.tab
             };
-            const newPastTasks = state.pastState.concat(foo1);
+            const newPastTasks = state.pastState.concat(partialState);
             const newFutureTask: ITodoState[] = [];
             return {
-                ...foo1,
+                ...partialState,
                 pastState: newPastTasks,
                 futureState: newFutureTask
             }
         }
         case CLEAR_COMPLETED_TODO: {
-            const foo1 = {
+            const partialState = {
                 activeTab: state.activeTab,
                 tasks: state.tasks.filter((task: ITask) => task.todoStatus === ACTIVE_TODO)
             };
-            const newPastTasks = state.pastState.concat(foo1);
+            const newPastTasks = state.pastState.concat(partialState);
             const newFutureTask: ITodoState[] = [];
             return {
-                ...foo1,
+                ...partialState,
                 pastState: newPastTasks,
                 futureState: newFutureTask
             }

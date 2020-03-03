@@ -33,7 +33,7 @@ function TodoApp() {
 
     const submitTodo = useCallback(todo => dispatch({type: ADD_TODO, payload: {text: todo}}), [dispatch]);
 
-    const toggleTodo = useCallback((id: string) => dispatch({type: TOGGLE_TODO, payload: {id}}), [dispatch]);
+    const toggleTodo = useCallback((id: number) => dispatch({type: TOGGLE_TODO, payload: {id}}), [dispatch]);
 
     const remainingTaskCount = useMemo(() => state.tasks.filter((task: ITask) => task.todoStatus === ACTIVE_TODO).length, [state.tasks]);
 

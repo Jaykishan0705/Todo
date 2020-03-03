@@ -6,7 +6,7 @@ const {ACTIVE_TODO, COMPLETED_TODO} = TODO_STATUSES;
 
 export interface ITask {
     todo: string;
-    id: string;
+    id: number;
     todoStatus: typeof ACTIVE_TODO | typeof COMPLETED_TODO
 }
 
@@ -32,7 +32,7 @@ interface IAddAction {
 interface IToggleAction {
     type: typeof TOGGLE_TODO;
     payload: {
-        id: string;
+        id: number;
     }
 }
 

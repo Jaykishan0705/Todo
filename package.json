@@ -5,10 +5,8 @@
   "homepage": "https://Jaykishan0705.github.io/Todo",
   "dependencies": {
     "@babel/core": "^7.8.4",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^25.1.2",
+    "@types/jest": "^25.1.3",
     "@types/lodash": "^4.14.149",
     "@types/node": "^13.7.1",
     "@types/react": "^16.9.19",
@@ -16,11 +14,13 @@
     "@types/react-tooltip": "^3.11.0",
     "@types/uuid": "^3.4.7",
     "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
     "gh-pages": "^2.2.0",
     "lodash": "^4.17.15",
     "npm": "^6.13.7",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.17",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0",
     "reselect": "^4.0.0",
@@ -51,5 +51,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {},
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.1.1",
+    "@testing-library/react": "^9.4.1",
+    "jest-dom": "^4.0.0"
   }
 }
